@@ -1,3 +1,7 @@
+<!-- badges: start -->
+ [![R-CMD-check](https://github.com/TheLaughingDuck/advRlab4package/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/TheLaughingDuck/advRlab4package/actions/workflows/R-CMD-check.yaml)
+ <!-- badges: end -->
+
 # advRlab4package
 A repository for lab 4 in the course Advanced Programming in R
 
