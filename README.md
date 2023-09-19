@@ -9,7 +9,7 @@ A repository for lab 4 in the course Advanced Programming in R
 
 * In RStudio console, load the package `devtools` with `library(devtools)`, which we will use to automate many of the developer tasks.
 
-* Create an R Project with `create_package(path=packagename)`.
+* Create an R Project with `create_package(path="the/file/path/of/your/package")`.
 
 * You may need to reload the `devtools` package, since the last step should have opened a new RStudio session.
 
@@ -58,6 +58,6 @@ function1 <- function(arg1, arg2){
  
 * Run `check()` which will run a whole bunch of checks on the package, including running your unit tests.
 
-* Make sure everything you want pushed is pushed into the repository. Test that it is possible to install the package by going to the RStudio console and running `devtools::install_github("a_link_to_your_repository", subdir="your subdirectory")`.
+* Make sure everything you want pushed is pushed into the repository. Test that it is possible to install the package by going to the RStudio console and running `devtools::install_github("User_name/repository_name", subdir="your subdirectory")`.
 
 * Create a release of the package on Github?
