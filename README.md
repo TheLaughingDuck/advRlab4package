@@ -5,6 +5,13 @@
 # advRlab4package
 A repository for lab 4 in the course Advanced Programming in R
 
+## Downloading and running this package
+* Open either RStudio or RGui. In the console, load the `devtools` package. See the [devtools readme](https://cran.r-project.org/web/packages/devtools/readme/README.html) for details (I recommend having a look at the Cheatsheet).
+
+* Run `devtools::install_github("TheLaughingDuck/name_of_this_repo")`. Note that the name of this repository *should* (because of convention and because it might avoid some issues), be named packagename. In case you keep multiple packages in the same repo, specify the subdirectory/package-folder-name with the argument `subdir="subdirectory"` in `install_github()`.
+
+* This package should now be installed on your machine. Try running `?packagename` and `?function1`.
+
 ## SETUP (this workflow should be verified/tested) (in this order)
 * Clone this repository locally in a suitable location. Preferably name the folder "packagename".
 
@@ -58,7 +65,7 @@ function1 <- function(arg1, arg2){
 "_PACKAGE"
 ```
 
-* Create test files for your functions. Run `use_testthat()`, which will setup some folder structure for your coming tests. You can now run `use_test("function1")` to create a file called `test-function1.R` in which you will be able to write all your unit tests for `function1`. If you run `use_test("function1")` again (now or later), it will open that file so you can work in it. You can now run `devtools::test()` to run all unit tests in the package. A common workflow when developing or solving bugs for a specific function (say `function1`) is to open `test-function1` and then _highlight and run_ the specific unit tests you are working on. Here is a simple file template for the indivual unit test files:
+* Create test files for your functions. Run `use_testthat()`, which will setup some folder structure for your coming tests. You can now run `use_test("function1")` to create a file called `test-function1.R` in which you will be able to write all your unit tests for `function1`. If you run `use_test("function1")` again (now or later), it will open that file so you can work in it. You can now run `devtools::test()` to run all unit tests in the package. A common workflow when developing or solving bugs for a specific function (say `function1`) is to open `test-function1` and then _highlight and run_ the specific unit tests you are working on. You can also run the tests for the current file with `test_active_file()`. Here is a simple file template for the indivual unit test files:
 
 ```
 test_that("Text explaining what this test will test", {
