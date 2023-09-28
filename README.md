@@ -54,16 +54,7 @@ function1 <- function(arg1, arg2){
 }
 ```
 
-* Whenever you have updated the Roxygen documentation of any function or dataset, run `document()` to update the corresponding `.Rd` files. Try running `?function1`. See [Generating Rd files](http://cran.nexr.com/web/packages/roxygen2/vignettes/rd.html) for help. You should also document the package. See the following template which should be saved/placed in `R/packagename.R`. The last line `"_PACKAGE"` indicates that this file is for the documentation of the package. Information from the DESCRIPTION file will automatically be added to the resulting documentation file `packagename-package.Rd`.
-
-```
-#' Package purpose
-#'
-#' Package description.
-#'
-#'
-"_PACKAGE"
-```
+* Whenever you have updated the Roxygen documentation of any function or dataset, run `document()` to update the corresponding `.Rd` files. Try running `?function1`. See [Generating Rd files](http://cran.nexr.com/web/packages/roxygen2/vignettes/rd.html) for help. You should also document the package: run `use_package_doc()`. This creates a file `R/packagename-package.R` which is used to create the corresponding `man/packagename-package.Rd` when you run `document()`. Information from the DESCRIPTION file will automatically be added to this (`.Rd`)  file.
 
 * Create test files for your functions. Run `use_testthat()`, which will setup some folder structure for your coming tests. You can now run `use_test("function1")` to create a file called `test-function1.R` in which you will be able to write all your unit tests for `function1`. If you run `use_test("function1")` again (now or later), it will open that file so you can work in it. You can now run `devtools::test()` to run all unit tests in the package. A common workflow when developing or solving bugs for a specific function (say `function1`) is to open `test-function1` and then _highlight and run_ the specific unit tests you are working on. You can also run the tests for the current file with `test_active_file()`. Here is a simple file template for the indivual unit test files:
 
