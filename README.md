@@ -91,3 +91,9 @@ test_that("Errors are discovered", {
 * Make sure everything you want pushed is pushed into the repository. Test that it is possible to install the package by going to the RStudio console and running `devtools::install_github("User_name/repository_name", subdir="your subdirectory")`.
 
 * Create a release of the package on Github? Choose and set a version number.
+
+
+
+# Other things (should be included somewhere)
+
+* Make a package available with e.g. `use_package("dplyr")`.

@@ -15,7 +15,10 @@
 
 ###------------V------------ INITIALIZING LINREG CLASS ------------V------------
 linreg <- setRefClass("linreg",
-                      fields=list(X="matrix",
+                      fields=list(
+                                  formula = "formula",
+                                  data = "data.frame",
+                                  X="matrix",
                                   y="numeric",
                                   coefficients_beta="matrix",
                                   fitted_y="matrix",
@@ -34,7 +37,9 @@ linreg <- setRefClass("linreg",
 
 ###------------V------------ SETTING UP METHODS ------------V------------
 # Function to set up linreg class and check input
-linreg$methods(initialize = function(formula, data){
+linreg$methods(initialize = function(formula_arg, data_arg){
+  formula <<- formula_arg
+  data <<- data_arg
 
   # ---V--- CHECK INPUT AND SETUP ---V---
   # Check formula argument
@@ -91,22 +96,77 @@ linreg$methods(print = function(){
 
 # --- PLOT method ---
 linreg$methods(plot = function(){
-  ggplot2::ggplot()
+  # Plot 1
+  ggplot2::ggplot(data, aes(y=residuals_e, x=fitted_y)) +
+    geom_point(shape=21, size = 2.5) +
+    geom_smooth(color="red", se=FALSE) +
+    geom_abline(intercept = 0, slope = 0, color = "grey", linetype="dashed") +
+
+    labs(title = "Residuals vs Fitted",
+         x = paste0("Fitted values\nlinreg(",
+                    as.character(formula)[2],
+                    " ~ ",
+                    as.character(formula)[3],
+                    ")"),
+         y = "Residuals") +
+
+    theme_bw() +
+    theme(panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank())
+
+
+  #Plot 2
+  #Still need to standardize the residuals
+  ggplot2::ggplot(.self$data, aes(y=residuals_e, x=fitted_y)) +
+    geom_point() +
+    geom_smooth(color="red", se=FALSE) +
+    geom_abline(intercept = 0, slope = 0, color = "grey", linetype="dashed") +
+
+    labs(title = "Scale-Location",
+         x = paste0("Fitted values\nlinreg(",
+                    as.character(formula)[2],
+                    " ~ ",
+                    as.character(formula)[3],
+                    ")"),
+         y = expression(sqrt("|Standardized residuals|"))) +
+
+    theme_bw() +
+    theme(panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank())
+
 })
 
 
 # --- RESID method ---
-linreg$methods(resid = function(){return(.self$residuals_e)})
+linreg$methods(resid = function(){return(residuals_e)})
 
 
 # --- PRED method ---
-linreg$methods(pred = function(){return(.self$fitted_y)})
+linreg$methods(pred = function(){return(fitted_y)})
 
 
 # --- COEF method ---
-linreg$methods(coef = function(){return(.self$coefficients_beta)})
+linreg$methods(coef = function(){return(coefficients_beta)})
 
 
 # --- SUMMARY method ---
-linreg$methods(summary = function(){return(c("A summary of the linreg obj."))})
+linreg$methods(summary = function(){
+  cat(paste0(
+    "Call:\n",
+    "lm(formula = ...)\n\n",
+    "Coefficients:\n\t",
+    "coefficients here"))})
 ###------------^------------ SETTING UP METHODS ------------^------------
+
+
+
+# TESTING
+#linob <- linreg$new(formula = Petal.Length~Sepal.Width+Sepal.Length, data=iris)
+#linob <- linreg$new(formula = Species ~ Petal.Length + Petal.Width + Sepal.Length + Sepal.Width, data=iris |> dplyr::mutate(Species = as.numeric(Species)))
+#linob$plot()
+
+#og_linob <- lm(formula = Species ~ Petal.Length + Petal.Width + Sepal.Length + Sepal.Width, data=iris |> dplyr::mutate(Species = as.numeric(Species)))
+#plot(og_linob, which = 1)
+
+#linob$pred()
+
