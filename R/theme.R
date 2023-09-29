@@ -6,7 +6,7 @@
 #'
 #' @return A `ggplot` object.
 #'
-#' @export theme
+#' @export
 
 
 theme <- function(plot){
