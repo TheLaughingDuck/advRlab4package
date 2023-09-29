@@ -62,9 +62,4 @@ theme <- function(plot){
 
   # Display the plot
   print(scatter_plot)
-
-
-
-
-
 }
