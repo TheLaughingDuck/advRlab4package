@@ -1,8 +1,8 @@
 ---
-title: "Vignette for the `advRlab4package`"
+title: "Vignette for the advRlab4package"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{lab4}
+  %\VignetteIndexEntry{"Vignette for the advRlab4package"}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,6 +16,11 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(advRlab4package)
+#library(ggplot2)
+```
+
+```{r}
+theme()
 ```
 
 
@@ -71,7 +76,7 @@ EX : class_name$methods_name()
 
 
 Testing or Show result 
-```{r}
+```{r eval=FALSE}
 linob <- linreg$new(formula = Species ~ Petal.Length + Petal.Width + Sepal.Length + Sepal.Width, data=iris |> dplyr::mutate(Species = as.numeric(Species)))
 plot(linob)
 ```

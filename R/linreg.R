@@ -10,7 +10,7 @@
 #'
 #' @source [Linear regression on Wikipedia.](https://en.wikipedia.org/wiki/Linear_regression)
 #'
-#' @export
+#' @export linreg
 
 
 ###------------V------------ INITIALIZING LINREG CLASS ------------V------------
