@@ -108,15 +108,15 @@ linreg$methods(print = function(){
 # --- PLOT method ---
 linreg$methods(plot = function(plots_to_show = c(1,2)){
   # Residuals vs Fitted plot
-  p1 <- ggplot2::ggplot(data, aes(y=residuals_e, x=fitted_y)) +
+  p1 <- ggplot2::ggplot(data, ggplot2::aes(y=residuals_e, x=fitted_y)) +
 
     # Create points, lines
-    geom_point(shape=21, size = 2.5) +
-    geom_smooth(color="red", se=FALSE, size=0.1) + #, method = "lm") +
-    geom_abline(intercept = 0, slope = 0, color = "grey", linetype="dashed") +
+    ggplot2::geom_point(shape=21, size = 2.5) +
+    ggplot2::geom_smooth(color="red", se=FALSE, size=0.1) + #, method = "lm") +
+    ggplot2::geom_abline(intercept = 0, slope = 0, color = "grey", linetype="dashed") +
 
     # Configure labels, theme, style
-    labs(title = "Residuals vs Fitted",
+    ggplot2::labs(title = "Residuals vs Fitted",
          x = paste0("Fitted values\nlinreg(",
                     as.character(formula)[2],
                     " ~ ",
@@ -124,26 +124,26 @@ linreg$methods(plot = function(plots_to_show = c(1,2)){
                     ")"),
          y = "Residuals") +
 
-    theme_bw() +
-    theme(panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank(),
-          plot.title = element_text(hjust = 0.5))
+    ggplot2::theme_bw() +
+    ggplot2::theme(panel.grid.major = element_blank(),
+                   panel.grid.minor = element_blank(),
+                   plot.title = element_text(hjust = 0.5))
 
 
   # Scale-location plot
   p2 <- ggplot2::ggplot(data,
-                        aes(y=sqrt(abs(residuals_e/as.numeric(res_var_sigma2))),
-                            x=fitted_y)) +
+                        ggplot2::aes(y=sqrt(abs(residuals_e/as.numeric(res_var_sigma2))),
+                   x=fitted_y)) +
 
     # Create points, lines
-    geom_point(shape=21, size = 2.5) +
+    ggplot2::geom_point(shape=21, size = 2.5) +
     #geom_line(aes(y=median(residuals_e), x=fitted_y)) +
-    geom_smooth(color="red", se=FALSE, size=0.1) +
+    ggplot2::geom_smooth(color="red", se=FALSE, size=0.1) +
     #geom_abline(intercept = 0, slope = 0, color = "grey", linetype="dashed") +
     #geom_text(data = data, aes(label = rownames(data))) +
 
     # Configure labels, theme, style
-    labs(title = "Scale-Location",
+    ggplot2::labs(title = "Scale-Location",
          x = paste0("Fitted values\nlinreg(",
                     as.character(formula)[2],
                     " ~ ",
@@ -151,10 +151,10 @@ linreg$methods(plot = function(plots_to_show = c(1,2)){
                     ")"),
          y = expression(sqrt("|Standardized residuals|"))) +
 
-    theme_bw() +
-    theme(panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank(),
-          plot.title = element_text(hjust = 0.5))
+    ggplot2::theme_bw() +
+    ggplot2::theme(panel.grid.major = element_blank(),
+                   panel.grid.minor = element_blank(),
+                   plot.title = element_text(hjust = 0.5))
 
 
   # Adding row numbers to the points in the plots

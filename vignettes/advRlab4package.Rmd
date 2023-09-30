@@ -19,10 +19,6 @@ library(advRlab4package)
 #library(ggplot2)
 ```
 
-```{r}
-theme()
-```
-
 
 # The linreg class
 An instance of the linreg class can easily be created like displayed in the chunk below. The two required arguments are a formula class object, and a dataframe.
