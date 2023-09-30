@@ -16,7 +16,6 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(advRlab4package)
-#library(ggplot2)
 ```
 
 
@@ -51,8 +50,11 @@ They work like this.
 The theme applies some things/changes onto a ggplot object. Here is an example. As you can see, the theme provides *some* kind of changes to the ggplot object.
 
 ```{r}
+# Load the ggplot2 package
+library(ggplot2)
+
 # Create a ggplot object
-gg_object <- ggplot(data=iris) |> geom_point(aes(x=Petal.Length, y=Petal.Width))
+gg_object <- ggplot(data=iris) + geom_point(aes(x=Petal.Length, y=Petal.Width))
 
 # Apply the theme function on the ggplot object
 theme(gg_object)
@@ -73,7 +75,7 @@ EX : class_name$methods_name()
 
 Testing or Show result 
 ```{r eval=FALSE}
-linob <- linreg$new(formula = Species ~ Petal.Length + Petal.Width + Sepal.Length + Sepal.Width, data=iris |> dplyr::mutate(Species = as.numeric(Species)))
-plot(linob)
+# linob <- linreg$new(formula = Species ~ Petal.Length + Petal.Width + Sepal.Length + Sepal.Width, data=iris |> dplyr::mutate(Species = as.numeric(Species)))
+# plot(linob)
 ```
 
