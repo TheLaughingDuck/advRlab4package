@@ -179,7 +179,7 @@ linreg$methods(plot = function(plots_to_show = c(1,2)){
 
 
   # Return the plots
-  return(keep_at(list(p1, p2), at=plots_to_show))
+  return(purrr::keep_at(list(p1, p2), at=plots_to_show))
 
 })
 
