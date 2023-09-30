@@ -125,9 +125,9 @@ linreg$methods(plot = function(plots_to_show = c(1,2)){
          y = "Residuals") +
 
     ggplot2::theme_bw() +
-    ggplot2::theme(panel.grid.major = element_blank(),
-                   panel.grid.minor = element_blank(),
-                   plot.title = element_text(hjust = 0.5))
+    ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
+                   panel.grid.minor = ggplot2::element_blank(),
+                   plot.title = ggplot2::element_text(hjust = 0.5))
 
 
   # Scale-location plot
@@ -152,30 +152,30 @@ linreg$methods(plot = function(plots_to_show = c(1,2)){
          y = expression(sqrt("|Standardized residuals|"))) +
 
     ggplot2::theme_bw() +
-    ggplot2::theme(panel.grid.major = element_blank(),
-                   panel.grid.minor = element_blank(),
-                   plot.title = element_text(hjust = 0.5))
+    ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
+                   panel.grid.minor = ggplot2::element_blank(),
+                   plot.title = ggplot2::element_text(hjust = 0.5))
 
 
   # Adding row numbers to the points in the plots
   data$row_num <<- rownames(data)
-  data_arranged <<- data |> arrange(desc(abs(residuals_e))) |> head(3)
+  data_arranged <<- data |> dplyr::arrange(desc(abs(residuals_e))) |> head(3)
 
-  p1 <- p1 + geom_text(data=data_arranged,
-                       aes(x=fitted_y,
-                           y = residuals_e,
-                           label=row_num),
-                       hjust = "left",
-                       nudge_x = 0.15,
-                       size = 3)
+  p1 <- p1 + ggplot2::geom_text(data=data_arranged,
+                                ggplot2::aes(x=fitted_y,
+                                             y = residuals_e,
+                                             label=row_num),
+                                hjust = "left",
+                                nudge_x = 0.15,
+                                size = 3)
 
-  p2 <- p2 + geom_text(data=data_arranged,
-                       aes(x=fitted_y,
-                           y = sqrt(abs(residuals_e/as.numeric(res_var_sigma2))),
-                           label=row_num),
-                       hjust = "left",
-                       nudge_x = 0.15,
-                       size = 3)
+  p2 <- p2 + ggplot2::geom_text(data=data_arranged,
+                                ggplot2::aes(x=fitted_y,
+                                             y = sqrt(abs(residuals_e/as.numeric(res_var_sigma2))),
+                                             label=row_num),
+                                hjust = "left",
+                                nudge_x = 0.15,
+                                size = 3)
 
 
   # Return the plots
