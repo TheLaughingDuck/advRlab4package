@@ -2,3 +2,4 @@
 
 export(linreg)
 export(theme)
+importFrom("methods", "new")
