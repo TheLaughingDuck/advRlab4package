@@ -6,9 +6,9 @@ Authors@R:
            family="Jorstedt",
            email="jorstedtsimon@gmail.com",
            role = c("aut", "cre")),
-    person(given="",
-           family="",
-           email="",
+    person(given="Muditha",
+           family="Cherangani",
+           email="mcherangan@gmail.com",
            role=c("aut")))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
