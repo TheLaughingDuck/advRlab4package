@@ -13,7 +13,7 @@ What the package does (one paragraph).
 
 Authors:
 \itemize{
-  \item 
+  \item Muditha Cherangani \email{mcherangan@gmail.com}
 }
 
 }
