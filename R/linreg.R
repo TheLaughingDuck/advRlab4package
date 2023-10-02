@@ -19,6 +19,8 @@ linreg <- setRefClass("linreg",
                                   # Defining arguments
                                   formula = "formula",
                                   data = "data.frame",
+                                  data_name = "character",
+
 
                                   #Math variables
                                   X="matrix",
@@ -32,10 +34,7 @@ linreg <- setRefClass("linreg",
                                   t_values="matrix",
 
                                   #In-the-middle-variables
-                                  data_arranged = "data.frame"),
-                      methods = list(
-                        summary = function(){return("NATHING")})
-                     )
+                                  data_arranged = "data.frame"))
 ###------------^------------ INITIALIZING LINREG CLASS ------------^------------
 
 
@@ -44,10 +43,11 @@ linreg <- setRefClass("linreg",
 ###------------V------------ SETTING UP METHODS ------------V------------
 # Function to set up linreg class and check input
 linreg$methods(initialize = function(formula_arg, data_arg){
-  #cat("Hello world")
 
+  # Read in the data and save the given name of the data argument
   formula <<- formula_arg
   data <<- data_arg
+  data_name <<- deparse(substitute(data_arg))
 
   # ---V--- CHECK INPUT AND SETUP ---V---
   # These checks appear to already be done through the definition of the arguments in fields list above.
@@ -73,36 +73,54 @@ linreg$methods(initialize = function(formula_arg, data_arg){
   data$residuals_e <<- residuals_e
 
   # Number of observations minus number of parameters
-  n_degfree <<- length(y) - length(formula[[3]])-1 #-1 because of constant
+  n_degfree <<- length(y) - length(colnames(X))
+  #cat(n_degfree, "\n")
+  #cat(length(formula[[3]]), "\n")
 
   res_var_sigma2 <<- (t(residuals_e) %*% residuals_e)/n_degfree
+
+  #cat("res var", res_var_sigma2, "\n")
 
   # Two issues: the multiplication, and also the fact that the variance matrix seems to have negative elements.
   # The res_var_sigma2[1] is because res_var_sigma2 is a matrix (1 row 1 col).
   var_of_beta <<- res_var_sigma2[1] * solve(t(X) %*% X)
 
-  t_values <<- coefficients_beta / sqrt(var(coefficients_beta))[1]
+  #cat("var beta", var_of_beta, "\n")
+
+  #t_values <<- coefficients_beta / sqrt(var(coefficients_beta))[1]
+  t_values <<- coefficients_beta/sqrt(diag(var_of_beta))
+
+
   # ---^--- CALCULATE MATH STUFF ---^---
   })
 
 
 # --- SHOW method ---
 # This func makes so that print(linreg_object) works
-linreg$methods(show = function(){
-  cat(paste0(
-    "Call:\n",
-    "lm(formula = ...)\n\n",
-    "Coefficients:\n\t",
-    "coefficients here"))})
+# linreg$methods(show = function(){
+#   cat(paste0(
+#     "Call:\n",
+#     "lm(formula = ...)\n\n",
+#     "Coefficients:\n\t",
+#     "coefficients here"))})
 
 
 # --- PRINT method ---
 linreg$methods(print = function(){
-  cat(paste0(
+  cat(
     "Call:\n",
-    "lm(formula = ...)\n\n",
-    "Coefficients:\n\t",
-    "coefficients here"))})
+    "linreg(formula = ", as.character(formula)[2], " ~ ", as.character(formula)[3], ", data = ", data_name, ")\n\n",
+    "Coefficients:\n",
+
+    sep="")
+    #paste0(colnames(X), sep="\t"), "\n\t",
+    #paste0(round(coefficients_beta, 2), sep="\t"),
+    #"\n",
+
+    #sep = "")
+
+  print.default(matrix(round(coefficients_beta, 2), nrow=1, ncol=3, dimnames = list("", colnames(X))))
+  })
 
 
 # --- PLOT method ---
@@ -198,11 +216,52 @@ linreg$methods(coef = function(){return(coefficients_beta)})
 
 # --- SUMMARY method ---
 linreg$methods(summary = function(){
-  cat(paste0(
+
+  df_output <- data.frame("Estimate" = coefficients_beta,
+                          "Std. Error" = sqrt(diag(var_of_beta)),
+                          "t value" = t_values,
+                          "Prob" = pt(q=-abs(t_values), df=n_degfree) + pt(q=abs(t_values), df=n_degfree, lower.tail=FALSE))
+  df_output <- df_output %>% dplyr::mutate(" " = dplyr::case_when(.[[4]] < 0.001 ~ "***",
+                                                                  .[[4]] < 0.01 ~ "**",
+                                                                  .[[4]] < 0.05 ~ "*",
+                                                                  .[[4]] < 0.1 ~ ".",
+                                                                  .[[4]] < 1 ~ " "))
+
+  # Set col and row names
+  colnames(df_output) <- c("Estimate", "Std. Error", "t value", "Pr(>|t|)", " ")
+  rownames(df_output) <- colnames(X)
+
+  cat(
     "Call:\n",
-    "lm(formula = ...)\n\n",
-    "Coefficients:\n\t",
-    "coefficients here"))})
+    "linreg(formula = ", as.character(formula)[2], " ~ ", as.character(formula)[3], ", data = ", data_name, ")\n\n",
+    "Coefficients:\n",
+
+    sep="")
+
+  print.default(as.matrix(df_output), quote=FALSE)
+
+  # print.default(matrix(c(round(coefficients_beta, 4),
+  #                      c(1,2,3),
+  #                      t_values,
+  #                      c(1,2,3),
+  #                      c(1, 1, 1)),
+  #                      nrow=3, ncol=5, byrow=FALSE, dimnames = list(colnames(X), c("Estimate", "Std. Error", "t value", "Pr(>|t|)", " "))))
+
+  cat("---\n")
+  cat("Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n")
+  cat("Residual standard error: ", round(sqrt(res_var_sigma2[1]), 2), " on ", n_degfree, " degrees of freedom", sep="")
+})
+
+
+
+
+linreg$methods(testing = function(){
+  cat(t_values, "\n")
+  cat("\n\n\np_values (two-sided): ", pt(q=-abs(t_values), df=n_degfree) + pt(q=abs(t_values), df=n_degfree, lower.tail=FALSE), "\n")
+  cat("\n\n\np_values (loweside): ", pt(q=-abs(t_values), df=n_degfree) + pt(q=abs(t_values), df=n_degfree, lower.tail=FALSE), "\n")
+  cat("\n\n\np_values (highside): ", pt(q=abs(t_values), df=n_degfree, lower.tail=FALSE), "\n")
+  cat("\n\n\np_values (alternati): ", pt(q=abs(t_values), df=n_degfree), "\n")
+})
 ###------------^------------ SETTING UP METHODS ------------^------------
 
 
@@ -219,12 +278,10 @@ linreg$methods(summary = function(){
 
 
 # TEST 2
-# linob <- linreg$new(formula = Petal.Length~Sepal.Width+Sepal.Length, data=iris)
-# og_linob <- lm(formula = Petal.Length~Sepal.Width+Sepal.Length, data=iris)
-# linob$plot()
-# plot(og_linob, which = 1)
-# plot(og_linob, which = 3)
+#linob <- linreg$new(formula = Petal.Length~Sepal.Width+Sepal.Length, data=iris)
+#linob$summary()
+#linob <- linreg$new(formula = Petal.Width~Sepal.Width+Sepal.Length+Sepal.Width, data=iris)
+#linob$summary()
 
-
-
-
+#summary(lm(formula = Petal.Length~Sepal.Width+Sepal.Length, data=iris))$coefficients[,4]
+#summary(lm(formula = Petal.Width~Sepal.Width+Sepal.Length+Sepal.Width, data=iris))$coefficients[,4]
