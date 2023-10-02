@@ -42,6 +42,10 @@ linreg_instance$plot()
 They work like this.
 
 ```{r}
+linreg_instance$resid()
+linreg_instance$pred()
+linreg_instance$coef()
+linreg_instance$summary()
 
 ```
 
@@ -66,7 +70,7 @@ theme(gg_object)
 # Extra things (maybe remove, or merge into the rest of the vignette)
 
 Reference Classes (RC), RC methods belong to objects, not functions.
-In this code, define a Reference Class "linreg" with data fields (formula,data,x,y,coefficients_beta,res_var_sigma2,..) and method (summary).
+In this code, define a Reference Class "linreg".
 
 
 Call a method on the instance: 
