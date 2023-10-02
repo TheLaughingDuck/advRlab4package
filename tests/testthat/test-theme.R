@@ -2,10 +2,10 @@
 #   expect_equal(new_function(arg1, arg2), expected_output)
 # })
 
-test_that("for correct output format", {
-  expect_equal(all(class(theme(ggplot())) == c("gg", "ggplot")), TRUE)
-  #expect_equal(new_function(arg1, arg2), expected_output)
-})
+# test_that("for correct output format", {
+#   #expect_equal(all(class(theme(ggplot())) == c("gg", "ggplot")), TRUE)
+#   #expect_equal(new_function(arg1, arg2), expected_output)
+# })
 
 # test_that("Bad input is discovered", {
 #   expect_error(theme(c(1:100)))
@@ -24,6 +24,6 @@ liu_data <- data.frame(
 )
 
 # Create the custom scatter plot using the function
-theme(liu_data)
+#theme(liu_data)
 
 

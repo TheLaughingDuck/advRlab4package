@@ -9,10 +9,10 @@
 #' @export theme
 
 # Create a custom function with a different name
-theme <- function(data) {
+theme <- function(plot) {
   # ---V--- CHECK INPUT ---V---
   # Check if the input is a ggplot object
-  stopifnot("argument \"plot\" is not ggplot object" = is.ggplot(plot))
+  stopifnot("argument \"plot\" is not ggplot object" = ggplot2::is.ggplot(plot))
   # ---^--- CHECK INPUT ---^---
 
   # Apply the ggplot2 theme
