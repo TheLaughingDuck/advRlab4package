@@ -221,11 +221,13 @@ linreg$methods(summary = function(){
                           "Std. Error" = sqrt(diag(var_of_beta)),
                           "t value" = t_values,
                           "Prob" = pt(q=-abs(t_values), df=n_degfree) + pt(q=abs(t_values), df=n_degfree, lower.tail=FALSE))
-  df_output <- df_output %>% dplyr::mutate(" " = dplyr::case_when(.[[4]] < 0.001 ~ "***",
-                                                                  .[[4]] < 0.01 ~ "**",
-                                                                  .[[4]] < 0.05 ~ "*",
-                                                                  .[[4]] < 0.1 ~ ".",
-                                                                  .[[4]] < 1 ~ " "))
+  df_output <- dplyr::mutate(df_output, " " = dplyr::case_when(Prob < 0.001 ~ "***",
+                                                               Prob < 0.01 ~ "**",
+                                                               Prob < 0.05 ~ "*",
+                                                               Prob < 0.1 ~ ".",
+                                                               Prob < 1 ~ " "))
+
+  #cat(df_output)
 
   # Set col and row names
   colnames(df_output) <- c("Estimate", "Std. Error", "t value", "Pr(>|t|)", " ")
