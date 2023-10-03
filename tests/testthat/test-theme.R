@@ -14,7 +14,6 @@
 #   expect_error(theme(1))
 # })
 
-
 # PLOT TESTS
 # Example data
 data <- data.frame(
@@ -25,6 +24,15 @@ data <- data.frame(
 
 # Create the custom scatter plot using the function
 theme(data)
+
+# Create the custom scatter plot using the function
+custom_plot <- theme(data)
+
+# Define the test case
+test_that("Custom theme function returns a ggplot object", {
+  expect_true(is.ggplot(custom_plot))
+})
+
 
 
 
