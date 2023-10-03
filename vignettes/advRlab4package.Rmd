@@ -47,22 +47,20 @@ aes - The mapping of colors/shape to data
 # Load the ggplot2 package
 library(ggplot2)
 
-gg_object <- ggplot ( data = iris ) +
+p1 <- ggplot ( data = iris ) +
       aes(x=years , y= level ) +
       geom_point ()
 
 # Apply the theme function on the ggplot object
-theme(gg_object)
+#theme(p1)
 ```
 
 # The `theme()` function
 The theme applies some things/changes onto a ggplot object. Here is an example. As you can see, the theme provides *some* kind of changes to the ggplot object.
 
 ```{r}
-theme(panel.grid.major = ggplot2::element_blank(),
-      panel.grid.minor = ggplot2::element_blank(),
-      plot.title = ggplot2::element_text(hjust = 0.5)
-      )
+#use ggtheme import
+theme_economist()
 
 ```
 
@@ -77,26 +75,6 @@ linreg_instance$coef()
 linreg_instance$summary()
 
 ```
-
-Linear Algebra calculation example Here .
-^y = Xβ^
-
-```{r}
-#Example :
-# Use solve() or inv(). solve() seems to keep the row and col labels.
-  coefficients_beta <<- solve(t(X) %*% X) %*% t(X) %*% y
-
-  fitted_y <<- X %*% coefficients_beta
-  data$fitted_y <<- fitted_y
-```
-
-PRED method use for fitted_y and return output.Example is here 
-```{r}
-# --- PRED method ---
-linreg$methods(pred = function(){
-  return(fitted_y)})
-```
-
 
 Reference Classes (RC), RC methods belong to objects, not functions.
 In this code, define a Reference Class "linreg".
