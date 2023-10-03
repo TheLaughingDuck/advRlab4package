@@ -14,6 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
+This package to handle Linear Regression models.
 ```{r setup}
 library(advRlab4package)
 ```
@@ -37,6 +38,34 @@ The plot method works like this.
 linreg_instance$plot()
 ```
 
+ggplot2 is data visualization package.Its "grammar of graphics".There are three sub parts.
+data - The dataset with observations to be visualized (data.frame)
+geom -  The geometric representation of data
+aes - The mapping of colors/shape to data
+
+```{r}
+# Load the ggplot2 package
+library(ggplot2)
+
+gg_object <- ggplot ( data = iris ) +
+      aes(x=years , y= level ) +
+      geom_point ()
+
+# Apply the theme function on the ggplot object
+theme(gg_object)
+```
+
+# The `theme()` function
+The theme applies some things/changes onto a ggplot object. Here is an example. As you can see, the theme provides *some* kind of changes to the ggplot object.
+
+```{r}
+theme(panel.grid.major = ggplot2::element_blank(),
+      panel.grid.minor = ggplot2::element_blank(),
+      plot.title = ggplot2::element_text(hjust = 0.5)
+      )
+
+```
+
 
 ## Some other `linreg` methods
 They work like this.
@@ -49,25 +78,25 @@ linreg_instance$summary()
 
 ```
 
-
-# The `theme()` function
-The theme applies some things/changes onto a ggplot object. Here is an example. As you can see, the theme provides *some* kind of changes to the ggplot object.
+Linear Algebra calculation example Here .
+^y = Xβ^
 
 ```{r}
-# Load the ggplot2 package
-library(ggplot2)
+#Example :
+# Use solve() or inv(). solve() seems to keep the row and col labels.
+  coefficients_beta <<- solve(t(X) %*% X) %*% t(X) %*% y
 
-# Create a ggplot object
-gg_object <- ggplot(data=iris) + geom_point(aes(x=Petal.Length, y=Petal.Width))
-
-# Apply the theme function on the ggplot object
-theme(gg_object)
+  fitted_y <<- X %*% coefficients_beta
+  data$fitted_y <<- fitted_y
 ```
 
+PRED method use for fitted_y and return output.Example is here 
+```{r}
+# --- PRED method ---
+linreg$methods(pred = function(){
+  return(fitted_y)})
+```
 
-
-
-# Extra things (maybe remove, or merge into the rest of the vignette)
 
 Reference Classes (RC), RC methods belong to objects, not functions.
 In this code, define a Reference Class "linreg".
