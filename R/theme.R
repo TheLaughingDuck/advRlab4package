@@ -7,7 +7,7 @@
 #' @return A `ggplot` object.
 #'
 #' @export theme
-#' @export ggthemes
+#' @import ggthemes
 
 # Create a custom function with a different name
 theme <- function(data) {
