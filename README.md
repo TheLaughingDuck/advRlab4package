@@ -8,7 +8,7 @@ A repository for lab 4 in the course Advanced Programming in R
 ## Downloading and running this package
 * Open either RStudio or RGui. In the console, load the `devtools` package. See the [devtools readme](https://cran.r-project.org/web/packages/devtools/readme/README.html) for details (I recommend having a look at the Cheatsheet).
 
-* Run `devtools::install_github("TheLaughingDuck/name_of_this_repo")`. Note that the name of this repository *should* (because of convention and because it might avoid some issues), be named packagename. In case you keep multiple packages in the same repo, specify the subdirectory/package-folder-name with the argument `subdir="subdirectory"` in `install_github()`.
+* Run `devtools::install_github("TheLaughingDuck/advRlab4package")`. Note that the name of this repository *should* (because of convention and because it might avoid some issues), be named packagename. In case you keep multiple packages in the same repo, specify the subdirectory/package-folder-name with the argument `subdir="subdirectory"` in `install_github()`.
 
 * This package should now be installed on your machine. Try running `?packagename` and `?function1`.
 
