@@ -23,6 +23,7 @@ Config/testthat/edition: 3
 Imports: 
     dplyr,
     ggplot2,
+    ggthemes,
     methods,
     purrr
 VignetteBuilder: knitr

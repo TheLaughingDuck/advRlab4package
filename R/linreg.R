@@ -111,9 +111,9 @@ linreg$methods(plot = function(plots_to_show = c(1,2)){
          y = "Residuals") +
 
     theme_bw() +
-    theme(panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank(),
-          plot.title = element_text(hjust = 0.5))
+    ggplot2::theme(panel.grid.major = element_blank(),
+                   panel.grid.minor = element_blank(),
+                   plot.title = element_text(hjust = 0.5))
 
 
   # Scale-location plot
@@ -135,9 +135,9 @@ linreg$methods(plot = function(plots_to_show = c(1,2)){
          y = expression(sqrt("|Standardized residuals|"))) +
 
     theme_bw() +
-    theme(panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank(),
-          plot.title = element_text(hjust = 0.5))
+    ggplot2::theme(panel.grid.major = element_blank(),
+                   panel.grid.minor = element_blank(),
+                   plot.title = element_text(hjust = 0.5))
 
 
   # Adding row numbers to the dataset, and selecting three outliers with respect
