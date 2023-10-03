@@ -3,3 +3,7 @@
 export(ggthemes)
 export(linreg)
 export(theme)
+import(dplyr)
+import(ggplot2)
+import(methods)
+import(purrr)
