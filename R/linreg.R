@@ -16,6 +16,7 @@
 #' @importFrom purrr keep_at
 #' @importFrom ggplot2 ggplot geom_point geom_smooth geom_abline labs theme_bw geom_text
 #' @importFrom ggplot2 aes
+#' @importFrom ggplot2 element_blank element_text
 #'
 #' @export linreg
 
