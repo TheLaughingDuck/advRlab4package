@@ -14,19 +14,19 @@ knitr::opts_chunk$set(
 )
 ```
 
-This package to handle Linear Regression models.
+# The advRlab4package
+The purpose of this package is to aid a user in performing a simple regression analysis. To this end, the package features and RC class named "linreg" which is equipped with various methods that are available to the user. Let's begin by loading the package.
+
 ```{r setup}
 library(advRlab4package)
 ```
 
-
 # The linreg class
-An instance of the linreg class can easily be created like displayed in the chunk below. The two required arguments are a formula class object, and a dataframe.
+In order to use the `linreg` class, an instance of the `linreg` class must be created. This instance is an object that has inherited all it's fields (variables) and methods (functions) from the `linreg` class. To illustrate this, consider how the class/group of all dogs (consisting of methods such as `jump()` , `run()` and `fetch()`) relate to an individual dog, Fluffy. An instance of the linreg class can easily be created like displayed in the chunk below. The two required arguments are a [formula class object](https://towardsdatascience.com/r-formula-tutorial-for-beginners-1a6d88e2d0bb), and a dataframe. In the example below, we will specify that we wish to analyse the iris dataset, and that we wish to model Petal length as a function of Sepal width. When the linreg instance is created, all the associated mathematical operations are carried out. The results of the analysis can then be extracted with the other methods in the `linreg` class.
 
 ```{r}
-# Example
-linreg_instance <- linreg$new(formula = Petal.Length ~ Sepal.Width,
-                          data = iris)
+# Creating an instance of the linreg class
+linreg_instance <- linreg$new(formula = Petal.Length ~ Sepal.Width, data = iris)
 ```
 
 
