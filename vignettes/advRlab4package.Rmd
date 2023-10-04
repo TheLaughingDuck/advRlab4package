@@ -45,11 +45,11 @@ aes - The mapping of colors/shape to data
 
 ```{r}
 # Load the ggplot2 package
-library(ggplot2)
-
-p1 <- ggplot ( data = iris ) +
-      aes(x=years , y= level ) +
-      geom_point ()
+# library(ggplot2)
+# 
+# p1 <- ggplot ( data = iris ) +
+#       aes(x=years , y= level ) +
+#       geom_point ()
 
 # Apply the theme function on the ggplot object
 #theme(p1)
@@ -60,7 +60,7 @@ The theme applies some things/changes onto a ggplot object. Here is an example. 
 
 ```{r}
 #use ggtheme import
-theme_economist()
+# theme_economist()
 
 ```
 
@@ -69,10 +69,10 @@ theme_economist()
 They work like this.
 
 ```{r}
-linreg_instance$resid()
-linreg_instance$pred()
-linreg_instance$coef()
-linreg_instance$summary()
+# linreg_instance$resid()
+# linreg_instance$pred()
+# linreg_instance$coef()
+# linreg_instance$summary()
 
 ```
 
