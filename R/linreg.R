@@ -11,9 +11,10 @@
 #' @source [Linear regression on Wikipedia.](https://en.wikipedia.org/wiki/Linear_regression)
 #'
 #' @import methods
-#' @import dplyr
-#' @import purrr
-#' @import ggplot2
+#' @importFrom dplyr arrange
+#' @importFrom magrittr %>%
+#' @importFrom purrr keep_at
+#' @importFrom ggplot2 geom_point geom_smooth geom_abline labs theme_bw geom_text
 #'
 #' @export linreg
 
@@ -143,7 +144,7 @@ linreg$methods(plot = function(plots_to_show = c(1,2)){
   # Adding row numbers to the dataset, and selecting three outliers with respect
   # to the residuals.
   data$row_num <<- rownames(data)
-  data_arranged <<- data |> arrange(desc(abs(residuals_e))) |> head(3)
+  data_arranged <<- data %>% arrange(desc(abs(residuals_e))) %>% head(3)
 
   # Add rownames to outliers in p1
   p1 <- p1 + geom_text(data=data_arranged,
