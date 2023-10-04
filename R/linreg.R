@@ -11,7 +11,7 @@
 #' @source [Linear regression on Wikipedia.](https://en.wikipedia.org/wiki/Linear_regression)
 #'
 #' @import methods
-#' @importFrom dplyr arrange
+#' @importFrom dplyr arrange mutate
 #' @importFrom magrittr %>%
 #' @importFrom purrr keep_at
 #' @importFrom ggplot2 ggplot geom_point geom_smooth geom_abline labs theme_bw geom_text

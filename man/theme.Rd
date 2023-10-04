@@ -4,10 +4,7 @@
 \alias{theme}
 \title{LiU Theme}
 \usage{
-theme(data)
-}
-\arguments{
-\item{plot}{A \code{ggplot} object.}
+theme()
 }
 \value{
 A \code{ggplot} object.
